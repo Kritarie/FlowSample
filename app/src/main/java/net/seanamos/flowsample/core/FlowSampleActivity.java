@@ -27,12 +27,16 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
     @Override
     public Object getSystemService(@NonNull String name) {
         if (scope == null) {
-            scope = MortarScope.buildRootScope()
-                    .withService(DaggerService.SERVICE_NAME,
-                            buildActivityComponent(DaggerService.<ApplicationComponent>
-                                    getApplicationComponent(this)))
-                    .withService(BundleServiceRunner.SERVICE_NAME, new BundleServiceRunner())
-                    .build("Root");
+            MortarScope parentScope = MortarScope.getScope(getApplicationContext());
+            scope = parentScope.findChild("Activity");
+            if (scope == null) {
+                scope = parentScope.buildChild()
+                        .withService(DaggerService.SERVICE_NAME,
+                                buildActivityComponent(DaggerService.<ApplicationComponent>
+                                        getComponentForContext(getApplicationContext())))
+                        .withService(BundleServiceRunner.SERVICE_NAME, new BundleServiceRunner())
+                        .build("Activity");
+            }
         }
         if (scope.hasService(name)) return scope.getService(name);
         if (flowDelegate != null) {

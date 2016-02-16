@@ -5,4 +5,6 @@
     android:layout_height="match_parent"
     android:id="@+id/home">
 
+    <include android:id="@+id/recycler" layout="@layout/recycler" />
+
 </net.seanamos.flowsample.ui.screen.home.HomeView>

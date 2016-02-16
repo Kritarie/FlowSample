@@ -7,4 +7,5 @@ import dagger.Subcomponent;
 @ScreenScope
 @Subcomponent(modules = HomeModule.class)
 public interface HomeComponent {
+    HomePresenter presenter();
 }

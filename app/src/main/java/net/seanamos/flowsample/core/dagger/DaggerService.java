@@ -13,10 +13,4 @@ public final class DaggerService {
         return (T) context.getSystemService(SERVICE_NAME);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T getApplicationComponent(@NonNull Context context) {
-        //noinspection ResourceType
-        return (T) context.getApplicationContext().getSystemService(SERVICE_NAME);
-    }
-
 }

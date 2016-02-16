@@ -2,7 +2,6 @@ package net.seanamos.flowsample.core;
 
 import android.app.Application;
 
-import net.seanamos.flowsample.data.api.ApiModule;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 
 import mortar.MortarScope;
@@ -24,7 +23,7 @@ public class FlowSampleApplication extends Application {
 
     protected ApplicationComponent buildApplicationComponent() {
         return DaggerApplicationComponent.builder()
-                .apiModule(new ApiModule())
+                .applicationModule(new ApplicationModule(this))
                 .build();
     }
 }
