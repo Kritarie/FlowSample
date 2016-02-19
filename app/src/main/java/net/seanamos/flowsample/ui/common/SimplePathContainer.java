@@ -77,27 +77,24 @@ public class SimplePathContainer extends PathContainer {
             containerView.addView(destinationView);
             // At this point both the origin and destination views are on screen. Animate!
             final View finalOriginView = originView;
-            UiUtil.waitForMeasure(destinationView, new UiUtil.OnMeasured() {
-                @Override
-                public void onMeasured(View view, int width, int height) {
-                    AnimatorSet set = new AnimatorSet();
-                    if (finalOriginView instanceof TransitionOut) {
-                        set.play(((TransitionOut) finalOriginView).transitionOut(destination, direction));
-                    }
-                    if (destinationView instanceof TransitionIn) {
-                        set.play(((TransitionIn) destinationView).transitionIn(origin, direction));
-                    }
-                    set.addListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            // Called when the animation is complete (if well-behaved), so remove the origin view
-                            containerView.removeView(finalOriginView);
-                            oldPath.destroyNotIn(context, pathContextFactory);
-                            callback.onTraversalCompleted();
-                        }
-                    });
-                    set.start();
+            UiUtil.waitForMeasure(destinationView, (view, width, height) -> {
+                AnimatorSet set = new AnimatorSet();
+                if (finalOriginView instanceof TransitionOut) {
+                    set.play(((TransitionOut) finalOriginView).transitionOut(destination, direction));
                 }
+                if (destinationView instanceof TransitionIn) {
+                    set.play(((TransitionIn) destinationView).transitionIn(origin, direction));
+                }
+                set.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        // Called when the animation is complete (if well-behaved), so remove the origin view
+                        containerView.removeView(finalOriginView);
+                        oldPath.destroyNotIn(context, pathContextFactory);
+                        callback.onTraversalCompleted();
+                    }
+                });
+                set.start();
             });
         }
     }

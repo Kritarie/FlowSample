@@ -26,6 +26,7 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
 
     @Override
     public Object getSystemService(@NonNull String name) {
+        // If Activity scope is null, build it
         if (scope == null) {
             MortarScope parentScope = MortarScope.getScope(getApplicationContext());
             scope = parentScope.findChild("Activity");
@@ -38,13 +39,18 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
                         .build("Activity");
             }
         }
-        if (scope.hasService(name)) return scope.getService(name);
+        // Check mortar for service
+        if (scope.hasService(name)){
+            return scope.getService(name);
+        }
+        // Check flow for service
         if (flowDelegate != null) {
             Object flowService = flowDelegate.getSystemService(name);
             if (flowService != null) {
                 return flowService;
             }
         }
+        // Default
         return super.getSystemService(name);
     }
 
@@ -86,7 +92,7 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
     @Override
     protected void onDestroy() {
         if (isFinishing()) {
-            MortarScope activityScope = MortarScope.findChild(getApplicationContext(), getClass().getName());
+            MortarScope activityScope = MortarScope.findChild(getApplicationContext(), "Activity");
             if (activityScope != null) {
                 activityScope.destroy();
             }
