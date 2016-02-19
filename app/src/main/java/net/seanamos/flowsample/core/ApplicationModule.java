@@ -7,14 +7,17 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.seanamos.flowsample.core.parcel.GsonParceler;
+import net.seanamos.flowsample.ui.screen.InitialHistory;
+import net.seanamos.flowsample.ui.screen.home.HomeScreen;
 
 import javax.inject.Named;
 
 import auto.parcelgson.gson.AutoParcelGsonTypeAdapterFactory;
 import dagger.Module;
 import dagger.Provides;
-import flow.StateParceler;
+import flow.History;
+import flow.KeyParceler;
+import mortar.MortarScope;
 
 @Module
 public class ApplicationModule {
@@ -23,14 +26,22 @@ public class ApplicationModule {
 
     @NonNull
     private final Application application;
+    @NonNull
+    private final MortarScope scope;
 
-    public ApplicationModule(@NonNull Application application) {
+    public ApplicationModule(@NonNull Application application, @NonNull MortarScope scope) {
         this.application = application;
+        this.scope = scope;
+    }
+
+    @Provides @NonNull @ApplicationScope
+    public MortarScope provideRootScope() {
+        return this.scope;
     }
 
     @Provides @NonNull @ApplicationScope @Named(CONTEXT_NAME)
     public Context provideContext() {
-        return application;
+        return this.application;
     }
 
     @Provides @NonNull @ApplicationScope
@@ -41,7 +52,17 @@ public class ApplicationModule {
     }
 
     @Provides @NonNull @ApplicationScope
-    public StateParceler provideParceler(@NonNull Gson gson) {
-        return new GsonParceler(gson);
+    public KeyParceler provideKeyParceler() {
+        return new AutoKeyParceler();
+    }
+
+    @Provides @NonNull @ApplicationScope
+    public InitialHistory provideInitialHistory() {
+        return new InitialHistory(History.single(new HomeScreen()));
+    }
+
+    @Provides @NonNull @ApplicationScope
+    public FlowServices provideFlowServices(MortarScope rootScope) {
+        return new FlowServices(rootScope);
     }
 }

@@ -5,10 +5,10 @@ import net.seanamos.flowsample.core.dagger.ScreenComponentFactory;
 import net.seanamos.flowsample.ui.ActivityComponent;
 import net.seanamos.flowsample.ui.screen.Screen;
 
-import flow.path.Path;
+import flow.ClassKey;
 
 @Screen(layout = R.layout.view_home, name = "Home")
-public final class HomeScreen extends Path implements ScreenComponentFactory<ActivityComponent> {
+public final class HomeScreen extends ClassKey implements ScreenComponentFactory<ActivityComponent> {
 
     @Override
     public Object buildComponent(ActivityComponent parent) {

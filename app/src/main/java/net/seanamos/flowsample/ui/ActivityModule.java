@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import net.seanamos.flowsample.core.FlowServices;
 import net.seanamos.flowsample.ui.screen.InitialHistory;
 import net.seanamos.flowsample.ui.screen.home.HomeScreen;
 

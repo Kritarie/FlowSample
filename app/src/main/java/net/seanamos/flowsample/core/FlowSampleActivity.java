@@ -1,28 +1,39 @@
 package net.seanamos.flowsample.core;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 import net.seanamos.flowsample.ui.ActivityComponent;
 import net.seanamos.flowsample.ui.ActivityModule;
+import net.seanamos.flowsample.ui.screen.Screen;
 
+import java.util.Map;
+
+import flow.Dispatcher;
 import flow.Flow;
-import flow.FlowDelegate;
 import flow.History;
-import flow.StateParceler;
-import flow.path.PathContainerView;
+import flow.KeyParceler;
+import flow.Traversal;
+import flow.TraversalCallback;
 import mortar.MortarScope;
 import mortar.bundler.BundleServiceRunner;
 
-public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispatcher {
+public class FlowSampleActivity extends AppCompatActivity implements Dispatcher {
+
+    private static final Map<Class, Integer> PATH_LAYOUT_CACHE = new ArrayMap<>();
 
     private MortarScope scope;
-    private FlowDelegate flowDelegate;
-    private PathContainerView flowContainer;
 
     @Override
     public Object getSystemService(@NonNull String name) {
@@ -34,7 +45,7 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
                 scope = parentScope.buildChild()
                         .withService(DaggerService.SERVICE_NAME,
                                 buildActivityComponent(DaggerService.<ApplicationComponent>
-                                        getComponentForContext(getApplicationContext())))
+                                        getComponent(getApplicationContext())))
                         .withService(BundleServiceRunner.SERVICE_NAME, new BundleServiceRunner())
                         .build("Activity");
             }
@@ -43,13 +54,7 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
         if (scope.hasService(name)){
             return scope.getService(name);
         }
-        // Check flow for service
-        if (flowDelegate != null) {
-            Object flowService = flowDelegate.getSystemService(name);
-            if (flowService != null) {
-                return flowService;
-            }
-        }
+
         // Default
         return super.getSystemService(name);
     }
@@ -59,34 +64,24 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
     }
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        ApplicationComponent component = DaggerService.<ApplicationComponent>getComponent(this);
+        FlowServices services = component.flowServices();
+        History history = component.initialHistory().get();
+        KeyParceler keyParceler = component.parceler();
+        newBase = Flow.configure(newBase, this)
+                .addServicesFactory(services)
+                .defaultKey(history.top())
+                .keyParceler(keyParceler)
+                .install();
+        super.attachBaseContext(newBase);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.root);
-        flowContainer = (PathContainerView) findViewById(R.id.root_layout);
-
-        BundleServiceRunner.getBundleServiceRunner(this).onCreate(savedInstanceState);
-
-        FlowDelegate.NonConfigurationInstance nonConfig =
-                (FlowDelegate.NonConfigurationInstance) getLastCustomNonConfigurationInstance();
-
-        ActivityComponent component = DaggerService.getComponentForContext(this);
-        StateParceler parceler = component.parceler();
-        History history = component.initialHistory().get();
-
-        flowDelegate = FlowDelegate.onCreate(nonConfig, getIntent(),
-                savedInstanceState, parceler, history, this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        flowDelegate.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        flowDelegate.onPause();
-        super.onPause();
+        //BundleServiceRunner.getBundleServiceRunner(this).onCreate(savedInstanceState);
     }
 
     @Override
@@ -103,29 +98,46 @@ public class FlowSampleActivity extends AppCompatActivity implements Flow.Dispat
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        flowDelegate.onNewIntent(intent);
+        Flow.onNewIntent(intent, this);
     }
 
     @Override public void onBackPressed() {
-        if (!flowDelegate.onBackPressed()) {
-            super.onBackPressed();
-        }
+        Flow.get(this).goBack();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        BundleServiceRunner.getBundleServiceRunner(this).onSaveInstanceState(outState);
-        flowDelegate.onSaveInstanceState(outState);
+        //BundleServiceRunner.getBundleServiceRunner(this).onSaveInstanceState(outState);
     }
 
     @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        return flowDelegate.onRetainNonConfigurationInstance();
-    }
+    public void dispatch(Traversal traversal, TraversalCallback callback) {
+        ViewGroup frame = (ViewGroup) findViewById(R.id.root_layout);
 
-    @Override
-    public void dispatch(Flow.Traversal traversal, Flow.TraversalCallback callback) {
-        flowContainer.dispatch(traversal, callback);
+        History history = traversal.origin;
+        Object destination = traversal.destination.top();
+
+        Class clazz = destination.getClass();
+        @LayoutRes Integer layoutRes = PATH_LAYOUT_CACHE.get(clazz);
+        if (layoutRes == null) {
+            Screen screen = (Screen) clazz.getAnnotation(Screen.class);
+            layoutRes = screen.layout();
+            PATH_LAYOUT_CACHE.put(clazz, layoutRes);
+        }
+        Context incomingContext = traversal.createContext(destination, this);
+        View incomingView = LayoutInflater.from(incomingContext).inflate(layoutRes, frame, false);
+        traversal.getState(destination).restore(incomingView);
+
+        if (history != null) {
+            Object origin = history.top();
+            traversal.getState(origin).save(frame.getChildAt(0));
+        }
+
+        frame.removeAllViews();
+        frame.addView(incomingView);
+
+        Log.d("FlowSampleActivity", "Dispatching to " + destination);
+        callback.onTraversalCompleted();
     }
 }
