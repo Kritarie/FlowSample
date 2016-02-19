@@ -8,7 +8,6 @@ import net.seanamos.flowsample.data.DataManager;
 import net.seanamos.flowsample.data.model.Person;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import mortar.Presenter;
 import mortar.bundler.BundleService;

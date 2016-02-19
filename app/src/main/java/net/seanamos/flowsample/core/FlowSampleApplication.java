@@ -14,18 +14,14 @@ public class FlowSampleApplication extends Application {
     @Override
     public Object getSystemService(String name) {
         if (scope == null) {
-            scope = MortarScope.buildRootScope()
-                    .withService(DaggerService.SERVICE_NAME, buildApplicationComponent())
-                    .build("Root");
+            scope = buildMortarScope();
         }
         if (scope.hasService(name)) return scope.getService(name);
         return super.getSystemService(name);
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        scope = buildMortarScope();
+    public static FlowSampleApplication get(Context context) {
+        return (FlowSampleApplication) context.getApplicationContext();
     }
 
     protected MortarScope buildMortarScope() {
@@ -36,7 +32,7 @@ public class FlowSampleApplication extends Application {
 
     protected ApplicationComponent buildApplicationComponent() {
         return DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this, scope))
+                .applicationModule(new ApplicationModule(this))
                 .build();
     }
 

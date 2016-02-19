@@ -23,6 +23,8 @@ import java.util.Map;
 import flow.Dispatcher;
 import flow.Flow;
 import flow.History;
+import flow.KeyChanger;
+import flow.KeyDispatcher;
 import flow.KeyParceler;
 import flow.Traversal;
 import flow.TraversalCallback;
@@ -65,14 +67,15 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        ApplicationComponent component = DaggerService.<ApplicationComponent>getComponent(this);
-        FlowServices services = component.flowServices();
+        Context application = newBase.getApplicationContext();
+        ApplicationComponent component = DaggerService.<ApplicationComponent>getComponent(application);
         History history = component.initialHistory().get();
         KeyParceler keyParceler = component.parceler();
         newBase = Flow.configure(newBase, this)
-                .addServicesFactory(services)
+                .addServicesFactory(new FlowServices(MortarScope.getScope(application)))
                 .defaultKey(history.top())
                 .keyParceler(keyParceler)
+                .dispatcher(this)
                 .install();
         super.attachBaseContext(newBase);
     }
@@ -81,7 +84,7 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.root);
-        //BundleServiceRunner.getBundleServiceRunner(this).onCreate(savedInstanceState);
+        BundleServiceRunner.getBundleServiceRunner(this).onCreate(savedInstanceState);
     }
 
     @Override
@@ -102,13 +105,15 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
     }
 
     @Override public void onBackPressed() {
-        Flow.get(this).goBack();
+        if (!Flow.get(this).goBack()) {
+            super.onBackPressed();
+        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //BundleServiceRunner.getBundleServiceRunner(this).onSaveInstanceState(outState);
+        BundleServiceRunner.getBundleServiceRunner(this).onSaveInstanceState(outState);
     }
 
     @Override
@@ -118,7 +123,7 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
         History history = traversal.origin;
         Object destination = traversal.destination.top();
 
-        Class clazz = destination.getClass();
+        Class clazz = destination.getClass().getSuperclass();
         @LayoutRes Integer layoutRes = PATH_LAYOUT_CACHE.get(clazz);
         if (layoutRes == null) {
             Screen screen = (Screen) clazz.getAnnotation(Screen.class);

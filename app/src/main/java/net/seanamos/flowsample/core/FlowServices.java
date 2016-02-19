@@ -13,26 +13,24 @@ public class FlowServices extends ServicesFactory {
 
     private static final String TAG = "FlowServices";
 
-    private final MortarScope parentScope;
+    private final MortarScope root;
 
-    public FlowServices(MortarScope parentScope) {
-        this.parentScope = parentScope;
+    public FlowServices(MortarScope root) {
+        this.root = root;
     }
 
     @Override
     public void bindServices(Services.Binder services) {
-        Object key = services.getKey();
+        ScreenComponentFactory key = services.getKey();
+        MortarScope parentScope = root.findChild("Activity");
         Log.d(TAG, "Setting up " + key);
-        if (key instanceof ScreenComponentFactory) {
-            //Object parentComponent = services.getService(DaggerService.SERVICE_NAME);
-            Object parentComponent = parentScope.getService(DaggerService.SERVICE_NAME);
-            ScreenComponentFactory factory = (ScreenComponentFactory) key;
+        if (!parentScope.hasService(key.toString())) {
             @SuppressWarnings("unchecked")
-            Object component = factory.buildComponent(parentComponent);
-            parentScope.buildChild()
+            Object component = key.buildComponent(parentScope.getService(DaggerService.SERVICE_NAME));
+            MortarScope childScope = parentScope.buildChild()
                     .withService(DaggerService.SERVICE_NAME, component)
                     .build(key.toString());
-            services.bind(DaggerService.SERVICE_NAME, component);
+            services.bind(DaggerService.SERVICE_NAME, childScope.getService(DaggerService.SERVICE_NAME));
         }
     }
 
@@ -40,8 +38,11 @@ public class FlowServices extends ServicesFactory {
     public void tearDownServices(Services services) {
         Object key = services.getKey();
         Log.d(TAG, "Tearing down " + key);
+        MortarScope parentScope = root.findChild("Activity");
         MortarScope childScope = parentScope.findChild(key.toString());
-        if (childScope == null) throw new IllegalStateException("Scope for key " + key + " was already destroyed!");
-        childScope.destroy();
+        if (childScope != null) {
+            childScope.destroy();
+            Log.d(TAG, childScope + " destroyed");
+        }
     }
 }

@@ -13,6 +13,8 @@ import net.seanamos.flowsample.data.model.Person;
 
 import java.util.List;
 
+import flow.Flow;
+
 public class HomeView extends FrameLayout {
 
     private final HomePresenter presenter;
@@ -22,7 +24,9 @@ public class HomeView extends FrameLayout {
 
     public HomeView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.presenter = DaggerService.<HomeComponent>getComponent(context).presenter();
+        //this.presenter = DaggerService.<HomeComponent>getComponent(context).presenter();
+        //noinspection ConstantConditions
+        this.presenter = Flow.<HomeComponent>getService(DaggerService.SERVICE_NAME, context).presenter();
     }
 
     @Override

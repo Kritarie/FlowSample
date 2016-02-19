@@ -16,6 +16,5 @@ import flow.KeyParceler;
 public interface ApplicationComponent {
     KeyParceler parceler();
     InitialHistory initialHistory();
-    FlowServices flowServices();
     ActivityComponent plus(ActivityModule activityModule);
 }

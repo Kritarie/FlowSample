@@ -30,9 +30,4 @@ public class ActivityModule {
     public Context provideContext() {
         return activity;
     }
-
-    @Provides @NonNull @ActivityScope
-    public InitialHistory provideInitialHistory() {
-        return new InitialHistory(History.single(new HomeScreen()));
-    }
 }

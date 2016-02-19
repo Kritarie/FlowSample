@@ -26,17 +26,9 @@ public class ApplicationModule {
 
     @NonNull
     private final Application application;
-    @NonNull
-    private final MortarScope scope;
 
-    public ApplicationModule(@NonNull Application application, @NonNull MortarScope scope) {
+    public ApplicationModule(@NonNull Application application) {
         this.application = application;
-        this.scope = scope;
-    }
-
-    @Provides @NonNull @ApplicationScope
-    public MortarScope provideRootScope() {
-        return this.scope;
     }
 
     @Provides @NonNull @ApplicationScope @Named(CONTEXT_NAME)
@@ -58,11 +50,6 @@ public class ApplicationModule {
 
     @Provides @NonNull @ApplicationScope
     public InitialHistory provideInitialHistory() {
-        return new InitialHistory(History.single(new HomeScreen()));
-    }
-
-    @Provides @NonNull @ApplicationScope
-    public FlowServices provideFlowServices(MortarScope rootScope) {
-        return new FlowServices(rootScope);
+        return new InitialHistory(History.single(HomeScreen.create()));
     }
 }
