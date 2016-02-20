@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.core;
+package net.seanamos.flowsample.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.seanamos.flowsample.R;
+import net.seanamos.flowsample.core.ApplicationComponent;
+import net.seanamos.flowsample.core.FlowServices;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 import net.seanamos.flowsample.ui.ActivityComponent;
 import net.seanamos.flowsample.ui.ActivityModule;
@@ -83,8 +85,8 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.root);
         BundleServiceRunner.getBundleServiceRunner(this).onCreate(savedInstanceState);
+        setContentView(R.layout.root);
     }
 
     @Override

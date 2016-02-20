@@ -7,27 +7,29 @@ import com.kritarie.glossator.GlossaryViewHolder;
 
 import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.data.model.Person;
+import net.seanamos.flowsample.ui.screen.person.PersonScreen;
 
-public class PersonViewHolder extends GlossaryViewHolder<Person> {
+import flow.Flow;
 
+public class PersonViewHolder extends GlossaryViewHolder<Person> implements View.OnClickListener {
+
+    private Person person;
     private final TextView name;
-    private final TextView species;
-    private final TextView eyeColor;
-    private final TextView birthYear;
 
     public PersonViewHolder(View itemView) {
         super(itemView);
         name = (TextView) itemView.findViewById(R.id.person_name);
-        species = (TextView) itemView.findViewById(R.id.person_species);
-        eyeColor = (TextView) itemView.findViewById(R.id.person_eye_color);
-        birthYear = (TextView) itemView.findViewById(R.id.person_birth_year);
+        itemView.setOnClickListener(this);
     }
 
     @Override
     public void setContent(Person content) {
+        this.person = content;
         name.setText(content.name());
-        species.setText(content.species().get(0));
-        eyeColor.setText(content.eyeColor());
-        birthYear.setText(content.birthYear());
+    }
+
+    @Override
+    public void onClick(View v) {
+        Flow.get(v).set(PersonScreen.create(person));
     }
 }

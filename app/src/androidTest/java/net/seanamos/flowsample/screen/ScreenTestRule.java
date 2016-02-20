@@ -13,7 +13,7 @@ import android.view.WindowManager;
 
 import com.squareup.spoon.Spoon;
 
-import net.seanamos.flowsample.core.FlowSampleActivity;
+import net.seanamos.flowsample.ui.FlowSampleActivity;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 import net.seanamos.flowsample.ui.ActivityComponent;
 

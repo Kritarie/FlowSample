@@ -1,10 +1,14 @@
 package net.seanamos.flowsample.ui.screen.home;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.widget.FrameLayout;
 
 import net.seanamos.flowsample.R;
@@ -54,6 +58,6 @@ public class HomeView extends FrameLayout {
     }
 
     public void showError(Throwable e) {
-        // TODO: 2/13/2016 todotodo
+        Snackbar.make(this, "Error loading datas", Snackbar.LENGTH_LONG);
     }
 }
