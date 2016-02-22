@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     android:id="@+id/home">
 
-    <include android:id="@+id/recycler" layout="@layout/recycler" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    />
+    <include
+        android:id="@+id/recycler_people"
+        layout="@layout/recycler" />
+    <include
+        android:id="@+id/recycler_planet"
+        layout="@layout/recycler" />
 
 </net.seanamos.flowsample.ui.screen.home.HomeView>

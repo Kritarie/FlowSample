@@ -1,5 +1,6 @@
 package net.seanamos.flowsample.data.network;
 
+import net.seanamos.flowsample.data.model.Planet;
 import net.seanamos.flowsample.data.network.response.PagingResponse;
 import net.seanamos.flowsample.data.model.Person;
 
@@ -14,5 +15,11 @@ public interface SWService {
 
     @GET("api/people/{person}")
     Observable<Person> fetchPerson(@Path("person") int id);
+
+    @GET("api/planets")
+    Observable<PagingResponse> fetchPlanets();
+
+    @GET("api/planets/{planet}")
+    Observable<Planet> fetchPlanet(@Path("planet") int id);
 
 }
