@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.core;
+package net.seanamos.flowsample.core.flow;
 
 import android.os.Parcelable;
 

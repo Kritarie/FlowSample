@@ -5,92 +5,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/person_birth_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_birth_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_eye_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_eye_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_hair_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_hair_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_mass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_mass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_skin_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_skin_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_home_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_home_world"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_films"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_films"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_species"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_species"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_starships"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_starships"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/person_vehicles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/person_vehicles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
+
+    </LinearLayout>
 
 </net.seanamos.flowsample.ui.screen.person.PersonView>

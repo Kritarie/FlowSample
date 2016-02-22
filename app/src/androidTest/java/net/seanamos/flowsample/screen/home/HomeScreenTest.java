@@ -19,7 +19,7 @@ public class HomeScreenTest {
 
     @SuppressWarnings("unused") // Called by reflection in ScreenTestRule
     public History history() {
-        return History.single(new HomeScreen());
+        return History.single(HomeScreen.create());
     }
 
     @Test

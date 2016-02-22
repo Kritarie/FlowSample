@@ -28,7 +28,6 @@ public class PersonPresenter extends Presenter<PersonView> {
 
     @Override
     protected void onLoad(Bundle savedInstanceState) {
-        super.onLoad(savedInstanceState);
         getView().showPerson(person);
     }
 }
