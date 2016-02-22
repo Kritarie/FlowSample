@@ -7,8 +7,10 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.seanamos.flowsample.core.flow.AutoKeyParceler;
 import net.seanamos.flowsample.ui.screen.InitialHistory;
 import net.seanamos.flowsample.ui.screen.home.HomeScreen;
+import net.seanamos.flowsample.ui.toolbar.ToolbarController;
 
 import javax.inject.Named;
 
@@ -17,7 +19,6 @@ import dagger.Module;
 import dagger.Provides;
 import flow.History;
 import flow.KeyParceler;
-import mortar.MortarScope;
 
 @Module
 public class ApplicationModule {
@@ -51,5 +52,10 @@ public class ApplicationModule {
     @Provides @NonNull @ApplicationScope
     public InitialHistory provideInitialHistory() {
         return new InitialHistory(History.single(HomeScreen.create()));
+    }
+
+    @Provides @NonNull @ApplicationScope
+    public ToolbarController provideToolbarController() {
+        return new ToolbarController();
     }
 }

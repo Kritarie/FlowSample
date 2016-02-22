@@ -1,9 +1,11 @@
-package net.seanamos.flowsample.core;
+package net.seanamos.flowsample.core.flow;
 
 import android.util.Log;
 
 import net.seanamos.flowsample.core.dagger.DaggerService;
 import net.seanamos.flowsample.core.dagger.ScreenComponentFactory;
+
+import java.util.Map;
 
 import flow.Services;
 import flow.ServicesFactory;
@@ -22,30 +24,27 @@ public class FlowServices extends ServicesFactory {
     @Override
     public void bindServices(Services.Binder services) {
         ScreenComponentFactory key = services.getKey();
-        MortarScope parentScope = root.findChild("Activity");
-        if (!parentScope.hasService(key.toString())) {
+        if (!root.hasService(key.toString())) {
             @SuppressWarnings("unchecked")
-            Object component = key.buildComponent(parentScope.getService(DaggerService.SERVICE_NAME));
-            MortarScope childScope = parentScope.findChild(key.toString());
+            Object component = key.buildComponent(root.getService(DaggerService.SERVICE_NAME));
+            MortarScope childScope = root.findChild(key.toString());
             if (childScope == null) {
                 Log.d(TAG, "Setting up " + key);
-                childScope = parentScope.buildChild()
+                root.buildChild()
                         .withService(DaggerService.SERVICE_NAME, component)
                         .build(key.toString());
             }
-            services.bind(DaggerService.SERVICE_NAME, childScope.getService(DaggerService.SERVICE_NAME));
+            services.bind(DaggerService.SERVICE_NAME, component);
         }
     }
 
     @Override
     public void tearDownServices(Services services) {
-//        Object key = services.getKey();
-//        Log.d(TAG, "Tearing down " + key);
-//        MortarScope parentScope = root.findChild("Activity");
-//        MortarScope childScope = parentScope.findChild(key.toString());
-//        if (childScope != null) {
-//            childScope.destroy();
-//            Log.d(TAG, childScope + " destroyed");
-//        }
+        Object key = services.getKey();
+        MortarScope childScope = root.findChild(key.toString());
+        if (childScope != null) {
+            Log.d(TAG, "Tearing down " + key);
+            childScope.destroy();
+        }
     }
 }

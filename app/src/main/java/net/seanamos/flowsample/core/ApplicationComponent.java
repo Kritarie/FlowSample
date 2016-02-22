@@ -1,9 +1,14 @@
 package net.seanamos.flowsample.core;
 
 import net.seanamos.flowsample.data.DataModule;
-import net.seanamos.flowsample.ui.ActivityComponent;
-import net.seanamos.flowsample.ui.ActivityModule;
 import net.seanamos.flowsample.ui.screen.InitialHistory;
+import net.seanamos.flowsample.ui.screen.home.HomeComponent;
+import net.seanamos.flowsample.ui.screen.home.HomeModule;
+import net.seanamos.flowsample.ui.screen.person.PersonComponent;
+import net.seanamos.flowsample.ui.screen.person.PersonModule;
+import net.seanamos.flowsample.ui.screen.vehicle.VehicleComponent;
+import net.seanamos.flowsample.ui.screen.vehicle.VehicleModule;
+import net.seanamos.flowsample.ui.toolbar.ToolbarController;
 
 import dagger.Component;
 import flow.KeyParceler;
@@ -16,5 +21,8 @@ import flow.KeyParceler;
 public interface ApplicationComponent {
     KeyParceler parceler();
     InitialHistory initialHistory();
-    ActivityComponent plus(ActivityModule activityModule);
+    ToolbarController toolbar();
+    HomeComponent plus(HomeModule homeModule);
+    PersonComponent plus(PersonModule personModule);
+    VehicleComponent plus(VehicleModule vehicleModule);
 }

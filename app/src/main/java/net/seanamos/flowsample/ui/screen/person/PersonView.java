@@ -3,7 +3,7 @@ package net.seanamos.flowsample.ui.screen.person;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.squareup.phrase.ListPhrase;
@@ -12,11 +12,9 @@ import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 import net.seanamos.flowsample.data.model.Person;
 
-import flow.Flow;
-
 import static net.seanamos.flowsample.util.Preconditions.isNullOrEmpty;
 
-public class PersonView extends LinearLayout {
+public class PersonView extends FrameLayout {
 
     private final PersonPresenter presenter;
     private final ListPhrase listFormatter = ListPhrase.from(" and ", ", ", ", and ");
@@ -36,8 +34,7 @@ public class PersonView extends LinearLayout {
 
     public PersonView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //noinspection ConstantConditions
-        presenter = Flow.<PersonComponent>getService(DaggerService.SERVICE_NAME, context).presenter();
+        presenter = DaggerService.<PersonComponent>getComponentForFlow(this).presenter();
     }
 
     @Override

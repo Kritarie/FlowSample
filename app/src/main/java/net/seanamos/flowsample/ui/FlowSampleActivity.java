@@ -7,53 +7,40 @@ import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.core.ApplicationComponent;
-import net.seanamos.flowsample.core.FlowServices;
+import net.seanamos.flowsample.core.flow.FlowServices;
 import net.seanamos.flowsample.core.dagger.DaggerService;
-import net.seanamos.flowsample.ui.ActivityComponent;
-import net.seanamos.flowsample.ui.ActivityModule;
 import net.seanamos.flowsample.ui.screen.Screen;
+import net.seanamos.flowsample.ui.toolbar.ToolbarController;
 
 import java.util.Map;
 
 import flow.Dispatcher;
 import flow.Flow;
 import flow.History;
-import flow.KeyChanger;
-import flow.KeyDispatcher;
 import flow.KeyParceler;
 import flow.Traversal;
 import flow.TraversalCallback;
 import mortar.MortarScope;
 import mortar.bundler.BundleServiceRunner;
 
-public class FlowSampleActivity extends AppCompatActivity implements Dispatcher {
+public class FlowSampleActivity extends AppCompatActivity implements Dispatcher, ToolbarController.Activity {
 
     private static final Map<Class, Integer> PATH_LAYOUT_CACHE = new ArrayMap<>();
+    private static final String TAG = FlowSampleActivity.class.getSimpleName();
 
     private MortarScope scope;
+    private ToolbarController toolbarController;
+    private Toolbar toolbar;
 
     @Override
     public Object getSystemService(@NonNull String name) {
-        // If Activity scope is null, build it
-        if (scope == null) {
-            MortarScope parentScope = MortarScope.getScope(getApplicationContext());
-            scope = parentScope.findChild("Activity");
-            if (scope == null) {
-                scope = parentScope.buildChild()
-                        .withService(DaggerService.SERVICE_NAME,
-                                buildActivityComponent(DaggerService.<ApplicationComponent>
-                                        getComponent(getApplicationContext())))
-                        .withService(BundleServiceRunner.SERVICE_NAME, new BundleServiceRunner())
-                        .build("Activity");
-            }
-        }
         // Check mortar for service
         if (scope.hasService(name)){
             return scope.getService(name);
@@ -63,18 +50,26 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
         return super.getSystemService(name);
     }
 
-    protected ActivityComponent buildActivityComponent(ApplicationComponent parent) {
-        return parent.plus(new ActivityModule(this));
+    private MortarScope getScope(@NonNull Context context) {
+        MortarScope parent = MortarScope.getScope(context);
+        MortarScope child = MortarScope.findChild(context, TAG);
+        if (child == null) {
+            child = parent.buildChild()
+                    .withService(BundleServiceRunner.SERVICE_NAME, new BundleServiceRunner())
+                    .build(TAG);
+        }
+        return child;
     }
 
     @Override
     protected void attachBaseContext(Context newBase) {
         Context application = newBase.getApplicationContext();
-        ApplicationComponent component = DaggerService.<ApplicationComponent>getComponent(application);
+        this.scope = getScope(application);
+        ApplicationComponent component = DaggerService.<ApplicationComponent>getComponentForContext(application);
         History history = component.initialHistory().get();
         KeyParceler keyParceler = component.parceler();
         newBase = Flow.configure(newBase, this)
-                .addServicesFactory(new FlowServices(MortarScope.getScope(application)))
+                .addServicesFactory(new FlowServices(scope))
                 .defaultKey(history.top())
                 .keyParceler(keyParceler)
                 .dispatcher(this)
@@ -87,12 +82,17 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
         super.onCreate(savedInstanceState);
         BundleServiceRunner.getBundleServiceRunner(this).onCreate(savedInstanceState);
         setContentView(R.layout.root);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbarController = DaggerService.<ApplicationComponent>getComponentForContext(this).toolbar();
+        toolbarController.takeActivity(this);
     }
 
     @Override
     protected void onDestroy() {
+        toolbarController.dropActivity(this);
         if (isFinishing()) {
-            MortarScope activityScope = MortarScope.findChild(getApplicationContext(), "Activity");
+            MortarScope activityScope = MortarScope.findChild(getApplicationContext(), TAG);
             if (activityScope != null) {
                 activityScope.destroy();
             }
@@ -124,6 +124,8 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
 
         History history = traversal.origin;
         Object destination = traversal.destination.top();
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(traversal.destination.size() > 1);
 
         Class clazz = destination.getClass().getSuperclass();
         @LayoutRes Integer layoutRes = PATH_LAYOUT_CACHE.get(clazz);
@@ -144,7 +146,6 @@ public class FlowSampleActivity extends AppCompatActivity implements Dispatcher 
         frame.removeAllViews();
         frame.addView(incomingView);
 
-        Log.d("FlowSampleActivity", "Dispatching to " + destination);
         callback.onTraversalCompleted();
     }
 }

@@ -1,6 +1,7 @@
 package net.seanamos.flowsample.data.model;
 
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public abstract class Person implements Parcelable {
     public abstract List<String> vehicles();
 
     @AutoParcelGson.Builder
-    interface Builder {
+    public interface Builder {
         Builder name(String name);
         Builder birthYear(String birthYear);
         Builder eyeColor(String eyeColor);
@@ -45,5 +46,15 @@ public abstract class Person implements Parcelable {
         Builder starships(List<String> starships);
         Builder vehicles(List<String> vehicles);
         Person build();
+    }
+
+    @NonNull
+    public static Builder builder() {
+        return new AutoParcelGson_Person.Builder();
+    }
+
+    @NonNull
+    public static Builder builder(@NonNull Person source) {
+        return new AutoParcelGson_Person.Builder(source);
     }
 }

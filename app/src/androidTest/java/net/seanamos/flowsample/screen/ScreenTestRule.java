@@ -15,7 +15,6 @@ import com.squareup.spoon.Spoon;
 
 import net.seanamos.flowsample.ui.FlowSampleActivity;
 import net.seanamos.flowsample.core.dagger.DaggerService;
-import net.seanamos.flowsample.ui.ActivityComponent;
 
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
