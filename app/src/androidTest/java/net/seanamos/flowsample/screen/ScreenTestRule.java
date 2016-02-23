@@ -54,8 +54,8 @@ public class ScreenTestRule extends UiThreadTestRule {
                         throw new IllegalStateException("Test method must be annotated @WithHistory");
                     }
                     History history = (History) testClassInstance.getClass().getMethod(withHistory.value()).invoke(testClassInstance);
-                    DaggerService.<ActivityComponent>getComponentForContext(activity)
-                            .initialHistory().set(history);
+                    //DaggerService.<ActivityComponent>getComponentForContext(activity)
+                    //       .initialHistory().set(history);
                     instrumentation.waitForIdleSync();
                     runOnUiThread(new Runnable() {
                         @Override
