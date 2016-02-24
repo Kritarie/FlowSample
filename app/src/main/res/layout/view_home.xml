@@ -10,11 +10,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     />
-    <include
-        android:id="@+id/recycler_people"
-        layout="@layout/recycler" />
-    <include
-        android:id="@+id/recycler_planet"
-        layout="@layout/recycler" />
 
 </net.seanamos.flowsample.ui.screen.home.HomeView>

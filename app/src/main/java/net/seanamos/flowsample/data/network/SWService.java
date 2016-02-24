@@ -3,6 +3,7 @@ package net.seanamos.flowsample.data.network;
 import net.seanamos.flowsample.data.model.Planet;
 import net.seanamos.flowsample.data.network.response.PagingResponse;
 import net.seanamos.flowsample.data.model.Person;
+import net.seanamos.flowsample.data.network.response.PagingResponsePlanets;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -17,7 +18,7 @@ public interface SWService {
     Observable<Person> fetchPerson(@Path("person") int id);
 
     @GET("api/planets")
-    Observable<PagingResponse> fetchPlanets();
+    Observable<PagingResponsePlanets> fetchPlanets();
 
     @GET("api/planets/{planet}")
     Observable<Planet> fetchPlanet(@Path("planet") int id);

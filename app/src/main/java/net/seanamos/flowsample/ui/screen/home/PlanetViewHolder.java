@@ -30,6 +30,6 @@ public class PlanetViewHolder extends GlossaryViewHolder<Planet> implements View
 
     @Override
     public void onClick(View v) {
-        Flow.get(v).set(PlanetScreen.create(planet));
+        Flow.get(v).set(PlanetScreen.builder().parent(Flow.getKey(v)).planet(planet).build());
     }
 }

@@ -1,100 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.seanamos.flowsample.ui.screen.person.PlanetView
+<net.seanamos.flowsample.ui.screen.planet.PlanetView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/planet_rotation_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_rotation_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_orbital_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_orbital_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_diameter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_diameter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_climate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_climate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_gravity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_gravity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_terrain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_terrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_surface_water"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_surface_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_population"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_population"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_residents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_residents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_films"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_films"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_created"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_created"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_edited"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_edited"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
 
-    <TextView
-        android:id="@+id/planet_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textColor="@color/darkGray"/>
+        <TextView
+            android:id="@+id/planet_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/darkGray"/>
+    </LinearLayout>
 
-</net.seanamos.flowsample.ui.screen.person.PlanetView>
+</net.seanamos.flowsample.ui.screen.planet.PlanetView>

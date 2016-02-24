@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 import net.seanamos.flowsample.data.model.Person;
+import net.seanamos.flowsample.data.model.Planet;
 
 import java.util.List;
 
@@ -44,15 +45,19 @@ public class HomeView extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        recycler = (RecyclerView) findViewById(R.id.recycler);
-        recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        recycler.setAdapter(adapter = new PersonAdapter());
+        //recycler = (RecyclerView) findViewById(R.id.recycler);
+        //recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        //recycler.setAdapter(adapter = new PersonAdapter());
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(pAdapter = new HomePagerAdapter());
     }
 
-    public void showList(@NonNull List<Person> people) {
+    public void showPeople(@NonNull List<Person> people) {
         pAdapter.setPeople(people);
+    }
+
+    public void showPlanets(@NonNull List<Planet> planets){
+        pAdapter.setPlanets(planets);
     }
 
     public void showError(Throwable e) {

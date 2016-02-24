@@ -6,6 +6,8 @@ import net.seanamos.flowsample.ui.screen.home.HomeComponent;
 import net.seanamos.flowsample.ui.screen.home.HomeModule;
 import net.seanamos.flowsample.ui.screen.person.PersonComponent;
 import net.seanamos.flowsample.ui.screen.person.PersonModule;
+import net.seanamos.flowsample.ui.screen.planet.PlanetComponent;
+import net.seanamos.flowsample.ui.screen.planet.PlanetModule;
 import net.seanamos.flowsample.ui.screen.vehicle.VehicleComponent;
 import net.seanamos.flowsample.ui.screen.vehicle.VehicleModule;
 import net.seanamos.flowsample.ui.toolbar.ToolbarController;
@@ -24,5 +26,6 @@ public interface ApplicationComponent {
     ToolbarController toolbar();
     HomeComponent plus(HomeModule homeModule);
     PersonComponent plus(PersonModule personModule);
+    PlanetComponent plus(PlanetModule planetModule);
     VehicleComponent plus(VehicleModule vehicleModule);
 }
