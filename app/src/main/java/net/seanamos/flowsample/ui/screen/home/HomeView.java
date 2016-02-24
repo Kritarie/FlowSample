@@ -52,7 +52,7 @@ public class HomeView extends FrameLayout {
     }
 
     public void showList(@NonNull List<Person> people) {
-        adapter.setPeople(people);
+        pAdapter.setPeople(people);
     }
 
     public void showError(Throwable e) {
