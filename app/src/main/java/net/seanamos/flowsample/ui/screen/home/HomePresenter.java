@@ -9,12 +9,11 @@ import net.seanamos.flowsample.data.model.Person;
 
 import java.util.ArrayList;
 
-import mortar.Presenter;
-import mortar.bundler.BundleService;
+import mortar.ViewPresenter;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class HomePresenter extends Presenter<HomeView> {
+public class HomePresenter extends ViewPresenter<HomeView> {
 
     private static final String STATE_PEOPLE = "state_people";
 
@@ -25,11 +24,6 @@ public class HomePresenter extends Presenter<HomeView> {
 
     public HomePresenter(@NonNull DataManager dataManager) {
         this.dataManager = dataManager;
-    }
-
-    @Override
-    protected BundleService extractBundleService(HomeView view) {
-        return BundleService.getBundleService(view.getContext());
     }
 
     @Override
