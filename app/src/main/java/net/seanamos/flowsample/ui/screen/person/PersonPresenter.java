@@ -6,10 +6,9 @@ import android.support.annotation.NonNull;
 import net.seanamos.flowsample.data.DataManager;
 import net.seanamos.flowsample.data.model.Person;
 
-import mortar.Presenter;
-import mortar.bundler.BundleService;
+import mortar.ViewPresenter;
 
-public class PersonPresenter extends Presenter<PersonView> {
+public class PersonPresenter extends ViewPresenter<PersonView> {
 
     @NonNull
     private final DataManager dataManager;
@@ -19,11 +18,6 @@ public class PersonPresenter extends Presenter<PersonView> {
     public PersonPresenter(@NonNull DataManager dataManager, @NonNull Person person) {
         this.dataManager = dataManager;
         this.person = person;
-    }
-
-    @Override
-    protected BundleService extractBundleService(PersonView view) {
-        return BundleService.getBundleService(view.getContext());
     }
 
     @Override
