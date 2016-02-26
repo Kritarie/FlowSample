@@ -8,7 +8,7 @@ import auto.parcelgson.AutoParcelGson;
 import auto.parcelgson.gson.annotations.SerializedName;
 
 @AutoParcelGson
-public abstract class Planet implements Parcelable {
+public abstract class Planet extends Model implements Parcelable {
 
     public abstract String name();
     @SerializedName("rotation_period")

@@ -23,4 +23,7 @@ public interface SWService {
     @GET("api/planets/{planet}")
     Observable<Planet> fetchPlanet(@Path("planet") int id);
 
+    @GET("api/{thing}")
+    Observable<PagingResponse> fetchThings(@Path("api") String str);
+
 }

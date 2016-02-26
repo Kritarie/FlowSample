@@ -8,4 +8,5 @@ import dagger.Subcomponent;
 @Subcomponent(modules = HomeModule.class)
 public interface HomeComponent {
     HomePresenter presenter();
+    GenericListPresenter genericPresenter();
 }

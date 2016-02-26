@@ -37,7 +37,7 @@ public class HomePagerAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         //return super.instantiateItem(container, position);
-
+        System.out.println("Pager Adapter here, position = " + position);
         if(position == 0){
             recyclers[0] = new RecyclerView(container.getContext());
             recyclers[0].setAdapter(personAdapter = new PersonAdapter());

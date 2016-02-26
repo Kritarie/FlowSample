@@ -9,7 +9,7 @@ import auto.parcelgson.AutoParcelGson;
 import auto.parcelgson.gson.annotations.SerializedName;
 
 @AutoParcelGson
-public abstract class Person implements Parcelable {
+public abstract class Person extends Model implements Parcelable {
 
     public abstract String name();
     @SerializedName("birth_year")

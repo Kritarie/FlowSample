@@ -32,4 +32,16 @@ public class ContentDataManager implements DataManager {
     public Observable<ArrayList<Planet>> getPlanets() {
         return swapi.fetchPlanets().map(PagingResponsePlanets::results);
     }
+
+    @Override
+    public <T> Observable<ArrayList<T>> getThings(Class<T> clz){
+        String str = "";
+        if(clz == Person.class){
+            str = "person";
+        }
+        if(clz == Planet.class){
+            str = "planet";
+        }
+        return swapi.fetchThings(str).map(PagingResponse::results);
+    }
 }

@@ -45,7 +45,7 @@ public class PlanetView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        name = (TextView) findViewById(R.id.planet_name);
+        //name = (TextView) findViewById(R.id.planet_name);
         rotationPeriod = (TextView) findViewById(R.id.planet_rotation_period);
         orbitalPeriod = (TextView) findViewById(R.id.planet_orbital_period);
         diameter = (TextView) findViewById(R.id.planet_diameter);
@@ -62,7 +62,7 @@ public class PlanetView extends LinearLayout {
     }
 
     public void showPlanet(@NonNull Planet planet) {
-        name.setText(planet.name());
+        //name.setText(planet.name());
         rotationPeriod.setText(planet.rotationPeriod());
         orbitalPeriod.setText(planet.orbitalPeriod());
         diameter.setText(planet.diameter());

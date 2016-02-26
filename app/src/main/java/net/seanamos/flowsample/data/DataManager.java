@@ -10,4 +10,5 @@ import rx.Observable;
 public interface DataManager {
     Observable<ArrayList<Person>> getPeople();
     Observable<ArrayList<Planet>> getPlanets();
+    <T> Observable<ArrayList<T>> getThings(Class<T> clz);
 }

@@ -15,4 +15,9 @@ public class HomeModule {
     public HomePresenter providePresenter(@NonNull DataManager manager) {
         return new HomePresenter(manager);
     }
+
+    @Provides @NonNull @ScreenScope
+    public GenericListPresenter provideGenericPresenter(@NonNull DataManager manager) {
+        return new GenericListPresenter(manager);
+    }
 }
