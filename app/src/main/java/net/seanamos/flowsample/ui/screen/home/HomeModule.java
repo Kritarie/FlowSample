@@ -3,6 +3,7 @@ package net.seanamos.flowsample.ui.screen.home;
 import android.support.annotation.NonNull;
 
 import net.seanamos.flowsample.data.DataManager;
+import net.seanamos.flowsample.data.model.Person;
 import net.seanamos.flowsample.ui.screen.ScreenScope;
 
 import dagger.Module;
@@ -18,6 +19,6 @@ public class HomeModule {
 
     @Provides @NonNull @ScreenScope
     public GenericListPresenter provideGenericPresenter(@NonNull DataManager manager) {
-        return new GenericListPresenter(manager);
+        return new GenericListPresenter(manager, Person.class);
     }
 }

@@ -57,4 +57,8 @@ public abstract class Person extends Model implements Parcelable {
     public static Builder builder(@NonNull Person source) {
         return new AutoParcelGson_Person.Builder(source);
     }
+
+    public String getTitle(){
+        return name();
+    }
 }

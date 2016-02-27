@@ -47,4 +47,8 @@ public abstract class Planet extends Model implements Parcelable {
         Builder url(String url);
         Planet build();
     }
+
+    public String getTitle(){
+        return name();
+    }
 }

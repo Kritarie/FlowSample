@@ -9,7 +9,7 @@ import auto.parcelgson.AutoParcelGson;
 import auto.parcelgson.gson.annotations.SerializedName;
 
 @AutoParcelGson
-public abstract class Vehicle implements Parcelable {
+public abstract class Vehicle extends Model implements Parcelable {
 
     public abstract String name();
     public abstract String model();
@@ -52,5 +52,9 @@ public abstract class Vehicle implements Parcelable {
     @NonNull
     public static Builder builder(@NonNull Vehicle source) {
         return new AutoParcelGson_Vehicle.Builder(source);
+    }
+
+    public String getTitle(){
+        return name();
     }
 }

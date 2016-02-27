@@ -2,6 +2,7 @@ package net.seanamos.flowsample.data;
 
 import android.support.annotation.NonNull;
 
+import net.seanamos.flowsample.data.model.Model;
 import net.seanamos.flowsample.data.model.Person;
 import net.seanamos.flowsample.data.model.Planet;
 import net.seanamos.flowsample.data.network.SWService;
@@ -34,14 +35,14 @@ public class ContentDataManager implements DataManager {
     }
 
     @Override
-    public <T> Observable<ArrayList<T>> getThings(Class<T> clz){
-        String str = "";
+    public Observable<ArrayList<? extends Model>> getThings(Class<?> clz){
+        //String str = "";
         if(clz == Person.class){
-            str = "person";
+            return getPeople();
         }
         if(clz == Planet.class){
             str = "planet";
         }
-        return swapi.fetchThings(str).map(PagingResponse::results);
+        //return swapi.fetchThings(str).map(PagingResponse::results);
     }
 }
