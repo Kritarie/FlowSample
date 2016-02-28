@@ -3,12 +3,14 @@ package net.seanamos.flowsample.data.model;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-import auto.parcelgson.AutoParcelGson;
-import auto.parcelgson.gson.annotations.SerializedName;
+import auto.parcel.AutoParcel;
+import me.tatarka.gsonvalue.annotations.GsonBuilder;
 
-@AutoParcelGson
+@AutoParcel
 public abstract class Person implements Parcelable {
 
     public abstract String name();
@@ -29,32 +31,39 @@ public abstract class Person implements Parcelable {
     public abstract List<String> species();
     public abstract List<String> starships();
     public abstract List<String> vehicles();
+    public abstract String created();
+    public abstract String edited();
+    public abstract String url();
 
-    @AutoParcelGson.Builder
+    @AutoParcel.Builder
     public interface Builder {
         Builder name(String name);
-        Builder birthYear(String birthYear);
-        Builder eyeColor(String eyeColor);
+        Builder birthYear(String birth_year);
+        Builder eyeColor(String eye_color);
         Builder gender(String gender);
-        Builder hairColor(String hairColor);
+        Builder hairColor(String hair_color);
         Builder height(String height);
         Builder mass(String mass);
-        Builder skinColor(String skinColor);
-        Builder homeWorld(String homeWorld);
+        Builder skinColor(String skin_color);
+        Builder homeWorld(String homeworld);
         Builder films(List<String> films);
         Builder species(List<String> species);
         Builder starships(List<String> starships);
         Builder vehicles(List<String> vehicles);
+        Builder created(String created);
+        Builder edited(String edited);
+        Builder url(String url);
         Person build();
     }
 
     @NonNull
+    @GsonBuilder
     public static Builder builder() {
-        return new AutoParcelGson_Person.Builder();
+        return new AutoParcel_Person.Builder();
     }
 
     @NonNull
     public static Builder builder(@NonNull Person source) {
-        return new AutoParcelGson_Person.Builder(source);
+        return new AutoParcel_Person.Builder(source);
     }
 }

@@ -8,17 +8,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.seanamos.flowsample.core.flow.AutoKeyParceler;
+import net.seanamos.flowsample.data.PagingResponseTypeAdapter;
 import net.seanamos.flowsample.ui.screen.InitialHistory;
 import net.seanamos.flowsample.ui.screen.home.HomeScreen;
 import net.seanamos.flowsample.ui.toolbar.ToolbarController;
 
 import javax.inject.Named;
 
-import auto.parcelgson.gson.AutoParcelGsonTypeAdapterFactory;
 import dagger.Module;
 import dagger.Provides;
 import flow.History;
 import flow.KeyParceler;
+import me.tatarka.gsonvalue.ValueTypeAdapterFactory;
 
 @Module
 public class ApplicationModule {
@@ -40,7 +41,8 @@ public class ApplicationModule {
     @Provides @NonNull @ApplicationScope
     public Gson provideGson() {
         return new GsonBuilder()
-                .registerTypeAdapterFactory(new AutoParcelGsonTypeAdapterFactory())
+                .registerTypeAdapterFactory(new ValueTypeAdapterFactory())
+                .registerTypeAdapterFactory(new PagingResponseTypeAdapter())
                 .create();
     }
 
