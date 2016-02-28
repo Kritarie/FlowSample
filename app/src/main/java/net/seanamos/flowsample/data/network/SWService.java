@@ -10,7 +10,7 @@ import rx.Observable;
 public interface SWService {
 
     @GET("api/people")
-    Observable<PagingResponse> fetchPeople();
+    Observable<PagingResponse<Person>> fetchPeople();
 
     @GET("api/people/{person}")
     Observable<Person> fetchPerson(@Path("person") int id);

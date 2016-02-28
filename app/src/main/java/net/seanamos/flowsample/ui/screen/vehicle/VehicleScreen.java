@@ -6,17 +6,18 @@ import net.seanamos.flowsample.core.ApplicationComponent;
 import net.seanamos.flowsample.core.dagger.ScreenComponentFactory;
 import net.seanamos.flowsample.data.model.Vehicle;
 
-import auto.parcelgson.AutoParcelGson;
+import auto.parcel.AutoParcel;
 import flow.ClassKey;
 import flow.TreeKey;
+import me.tatarka.gsonvalue.annotations.GsonBuilder;
 
-@AutoParcelGson
+@AutoParcel
 public abstract class VehicleScreen extends ClassKey implements TreeKey, ScreenComponentFactory<ApplicationComponent> {
 
     public abstract Object parent();
     public abstract Vehicle vehicle();
 
-    @AutoParcelGson.Builder
+    @AutoParcel.Builder
     public interface Builder {
         Builder parent(Object parent);
         Builder vehicle(Vehicle vehicle);
@@ -34,12 +35,13 @@ public abstract class VehicleScreen extends ClassKey implements TreeKey, ScreenC
     }
 
     @NonNull
+    @GsonBuilder
     public static Builder builder() {
-        return new AutoParcelGson_VehicleScreen.Builder();
+        return new AutoParcel_VehicleScreen.Builder();
     }
 
     @NonNull
     public static Builder builder(@NonNull VehicleScreen source) {
-        return new AutoParcelGson_VehicleScreen.Builder(source);
+        return new AutoParcel_VehicleScreen.Builder(source);
     }
 }

@@ -7,10 +7,11 @@ import net.seanamos.flowsample.core.ApplicationComponent;
 import net.seanamos.flowsample.core.dagger.ScreenComponentFactory;
 import net.seanamos.flowsample.ui.screen.Screen;
 
-import auto.parcelgson.AutoParcelGson;
+import auto.parcel.AutoParcel;
 import flow.ClassKey;
+import me.tatarka.gsonvalue.annotations.GsonConstructor;
 
-@AutoParcelGson
+@AutoParcel
 @Screen(layout = R.layout.view_home, name = "Home")
 public abstract class HomeScreen extends ClassKey implements ScreenComponentFactory<ApplicationComponent>, Parcelable{
 
@@ -19,7 +20,8 @@ public abstract class HomeScreen extends ClassKey implements ScreenComponentFact
         return parent.plus(new HomeModule());
     }
 
+    @GsonConstructor
     public static HomeScreen create() {
-        return new AutoParcelGson_HomeScreen();
+        return new AutoParcel_HomeScreen();
     }
 }
