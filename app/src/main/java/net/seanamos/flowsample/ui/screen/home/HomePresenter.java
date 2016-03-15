@@ -28,14 +28,14 @@ public class HomePresenter extends ViewPresenter<HomeView> {
 
     @Override
     protected void onLoad(Bundle savedInstanceState) {
-        super.onLoad(savedInstanceState);
-
         if (people == null && savedInstanceState != null) {
             people = savedInstanceState.getParcelableArrayList(STATE_PEOPLE);
         }
 
         if (people != null) {
-            getView().showList(people);
+            if (getView() != null) {
+                getView().showList(people);
+            }
         } else {
             dataManager.getPeople()
                     .subscribeOn(Schedulers.io())
@@ -46,7 +46,6 @@ public class HomePresenter extends ViewPresenter<HomeView> {
 
     @Override
     protected void onSave(Bundle outState) {
-        super.onSave(outState);
         outState.putParcelableArrayList(STATE_PEOPLE, people);
     }
 

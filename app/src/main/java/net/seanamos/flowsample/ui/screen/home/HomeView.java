@@ -1,6 +1,9 @@
 package net.seanamos.flowsample.ui.screen.home;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,5 +55,59 @@ public class HomeView extends FrameLayout {
 
     public void showError(Throwable e) {
         Snackbar.make(this, "Error loading datas", Snackbar.LENGTH_LONG);
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+
+        Bundle bundle = new Bundle();
+        presenter.onSave(bundle);
+
+        return new SavedState(superState, bundle);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        if(!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+
+        presenter.onLoad(ss.bundle);
+    }
+
+    static class SavedState extends BaseSavedState {
+        @NonNull
+        private final Bundle bundle;
+
+        SavedState(@NonNull Parcelable superState, @NonNull Bundle bundle) {
+            super(superState);
+            this.bundle = bundle;
+        }
+
+        private SavedState(@NonNull Parcel in) {
+            super(in);
+            this.bundle = in.readBundle();
+        }
+
+        @Override
+        public void writeToParcel(@NonNull Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeBundle(this.bundle);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>() {
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
     }
 }

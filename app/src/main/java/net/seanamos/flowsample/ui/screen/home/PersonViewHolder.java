@@ -30,6 +30,6 @@ public class PersonViewHolder extends GlossaryViewHolder<Person> implements View
 
     @Override
     public void onClick(View v) {
-        Flow.get(v).set(PersonScreen.builder().parent(Flow.getKey(v)).person(person).build());
+        Flow.get(v).set(PersonScreen.from(person));
     }
 }

@@ -1,6 +1,7 @@
 package net.seanamos.flowsample.ui.screen.home;
 
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.core.ApplicationComponent;
@@ -15,8 +16,9 @@ import me.tatarka.gsonvalue.annotations.GsonConstructor;
 @Screen(layout = R.layout.view_home, name = "Home")
 public abstract class HomeScreen extends ClassKey implements ScreenComponentFactory<ApplicationComponent>, Parcelable{
 
+    @NonNull
     @Override
-    public Object buildComponent(ApplicationComponent parent) {
+    public Object buildComponent(@NonNull ApplicationComponent parent) {
         return parent.plus(new HomeModule());
     }
 
