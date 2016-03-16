@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.ui.screen.planet;
+package net.seanamos.flowsample.ui.screen.planet.detail;
 
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -15,7 +15,7 @@ import flow.TreeKey;
 
 @AutoParcelGson
 @Screen(layout = R.layout.detail_planet, name = "Planet")
-public abstract class PlanetScreen extends ClassKey implements TreeKey, ScreenComponentFactory<ApplicationComponent>, Parcelable {
+public abstract class PlanetDetailScreen extends ClassKey implements TreeKey, ScreenComponentFactory<ApplicationComponent>, Parcelable {
 
     public abstract Object parent();
     public abstract Planet planet();
@@ -24,12 +24,12 @@ public abstract class PlanetScreen extends ClassKey implements TreeKey, ScreenCo
     public interface Builder {
         Builder parent(Object parent);
         Builder planet(Planet planet);
-        PlanetScreen build();
+        PlanetDetailScreen build();
     }
 
     @Override
     public Object buildComponent(ApplicationComponent parent) {
-        return parent.plus(new PlanetModule(planet()));
+        return parent.plus(new PlanetDetailModule(planet()));
     }
 
     @Override
@@ -41,7 +41,7 @@ public abstract class PlanetScreen extends ClassKey implements TreeKey, ScreenCo
     }
 
     @NonNull
-    public static Builder builder(@NonNull PlanetScreen source) {
+    public static Builder builder(@NonNull PlanetDetailScreen source) {
         return new AutoParcelGson_PlanetScreen.Builder(source);
     }
 }

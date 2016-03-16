@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.seanamos.flowsample.ui.screen.planet.PlanetView
+<net.seanamos.flowsample.ui.screen.planet.detail.PlanetDetailView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -103,4 +103,4 @@
             android:textColor="@color/darkGray"/>
     </LinearLayout>
 
-</net.seanamos.flowsample.ui.screen.planet.PlanetView>
+</net.seanamos.flowsample.ui.screen.planet.detail.PlanetDetailView>

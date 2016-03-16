@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.ui.screen.planet;
+package net.seanamos.flowsample.ui.screen.planet.detail;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,9 +16,9 @@ import flow.Flow;
 
 import static net.seanamos.flowsample.util.Preconditions.isNullOrEmpty;
 
-public class PlanetView extends LinearLayout {
+public class PlanetDetailView extends LinearLayout {
 
-    private final PlanetPresenter presenter;
+    private final PlanetDetailPresenter presenter;
     private final ListPhrase listFormatter = ListPhrase.from(" and ", ", ", ", and ");
 
     private TextView name;
@@ -36,10 +36,10 @@ public class PlanetView extends LinearLayout {
     private TextView edited;
     private TextView url;
 
-    public PlanetView(Context context, AttributeSet attrs) {
+    public PlanetDetailView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //noinspection ConstantConditions
-        presenter = Flow.<PlanetComponent>getService(DaggerService.SERVICE_NAME, context).presenter();
+        presenter = Flow.<PlanetDetailComponent>getService(DaggerService.SERVICE_NAME, context).presenter();
     }
 
     @Override

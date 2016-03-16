@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.ui.screen.planet;
+package net.seanamos.flowsample.ui.screen.planet.detail;
 
 import android.support.annotation.NonNull;
 
@@ -10,12 +10,12 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class PlanetModule {
+public class PlanetDetailModule {
 
     @NonNull
     private final Planet planet;
 
-    public PlanetModule(@NonNull Planet planet) {
+    public PlanetDetailModule(@NonNull Planet planet) {
         this.planet = planet;
     }
 
@@ -25,7 +25,7 @@ public class PlanetModule {
     }
 
     @Provides @NonNull @ScreenScope
-    public PlanetPresenter providePresenter(@NonNull DataManager dataManager, @NonNull Planet planet) {
-        return new PlanetPresenter(dataManager, planet);
+    public PlanetDetailPresenter providePresenter(@NonNull DataManager dataManager, @NonNull Planet planet) {
+        return new PlanetDetailPresenter(dataManager, planet);
     }
 }
