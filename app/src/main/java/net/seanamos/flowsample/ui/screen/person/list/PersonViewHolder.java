@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.ui.screen.home;
+package net.seanamos.flowsample.ui.screen.person.list;
 
 import android.view.View;
 import android.widget.TextView;
@@ -7,7 +7,7 @@ import com.kritarie.glossator.GlossaryViewHolder;
 
 import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.data.model.Person;
-import net.seanamos.flowsample.ui.screen.person.PersonScreen;
+import net.seanamos.flowsample.ui.screen.person.detail.PersonScreen;
 
 import flow.Flow;
 

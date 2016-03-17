@@ -39,6 +39,7 @@ public class FlowSampleApplication extends Application {
     }
 
     protected ApplicationComponent buildApplicationComponent() {
+
         return DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();

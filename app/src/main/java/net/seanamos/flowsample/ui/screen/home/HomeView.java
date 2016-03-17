@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
@@ -16,6 +15,7 @@ import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 import net.seanamos.flowsample.data.model.Person;
 import net.seanamos.flowsample.data.model.Planet;
+import net.seanamos.flowsample.ui.screen.person.list.PersonAdapter;
 
 import java.util.List;
 

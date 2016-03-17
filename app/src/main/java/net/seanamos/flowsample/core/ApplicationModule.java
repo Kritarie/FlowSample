@@ -11,7 +11,12 @@ import net.seanamos.flowsample.core.flow.AutoKeyParceler;
 import net.seanamos.flowsample.data.PagingResponseTypeAdapter;
 import net.seanamos.flowsample.ui.screen.InitialHistory;
 import net.seanamos.flowsample.ui.screen.home.HomeScreen;
+import net.seanamos.flowsample.ui.screen.person.list.PersonListScreen;
+import net.seanamos.flowsample.ui.screen.planet.list.PlanetListScreen;
 import net.seanamos.flowsample.ui.toolbar.ToolbarController;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Named;
 
@@ -53,7 +58,7 @@ public class ApplicationModule {
 
     @Provides @NonNull @ApplicationScope
     public InitialHistory provideInitialHistory() {
-        return new InitialHistory(History.single(HomeScreen.create()));
+        return new InitialHistory(History.single(HomeScreen.from(Arrays.asList(PersonListScreen.create(), PlanetListScreen.create()))));
     }
 
     @Provides @NonNull @ApplicationScope

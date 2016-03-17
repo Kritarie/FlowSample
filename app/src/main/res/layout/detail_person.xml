@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.seanamos.flowsample.ui.screen.person.PersonView
+<net.seanamos.flowsample.ui.screen.person.detail.PersonView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -97,4 +97,4 @@
 
     </LinearLayout>
 
-</net.seanamos.flowsample.ui.screen.person.PersonView>
+</net.seanamos.flowsample.ui.screen.person.detail.PersonView>

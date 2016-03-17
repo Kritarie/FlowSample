@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.ui.screen.person;
+package net.seanamos.flowsample.ui.screen.person.detail;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

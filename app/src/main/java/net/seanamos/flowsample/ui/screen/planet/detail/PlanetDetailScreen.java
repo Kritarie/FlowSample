@@ -16,7 +16,7 @@ import me.tatarka.gsonvalue.annotations.GsonConstructor;
 
 @AutoParcel
 @Screen(layout = R.layout.detail_planet, name = "Planet")
-public abstract class PlanetDetailScreen extends ClassKey implements TreeKey, ScreenComponentFactory<ApplicationComponent>, Parcelable {
+public abstract class PlanetDetailScreen extends ClassKey implements ScreenComponentFactory<ApplicationComponent>, Parcelable {
 
     public abstract Planet planet();
 

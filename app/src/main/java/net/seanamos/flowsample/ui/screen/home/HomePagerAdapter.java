@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import net.seanamos.flowsample.data.model.Person;
 import net.seanamos.flowsample.data.model.Planet;
+import net.seanamos.flowsample.ui.screen.person.list.PersonAdapter;
 import net.seanamos.flowsample.ui.screen.planet.list.PlanetAdapter;
 
 import java.util.List;

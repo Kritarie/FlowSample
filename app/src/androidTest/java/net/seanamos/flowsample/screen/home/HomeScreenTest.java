@@ -9,6 +9,8 @@ import net.seanamos.flowsample.screen.WithHistory;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import flow.History;
 
 @LargeTest
@@ -19,7 +21,7 @@ public class HomeScreenTest {
 
     @SuppressWarnings("unused") // Called by reflection in ScreenTestRule
     public History history() {
-        return History.single(HomeScreen.create());
+        return History.single(HomeScreen.from(Arrays.asList()));
     }
 
     @Test
