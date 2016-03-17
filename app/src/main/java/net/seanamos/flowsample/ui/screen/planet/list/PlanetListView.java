@@ -3,6 +3,7 @@ package net.seanamos.flowsample.ui.screen.planet.list;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
@@ -23,9 +24,9 @@ public class PlanetListView extends FrameLayout {
     private RecyclerView recycler;
     private PlanetAdapter adapter;
 
-    public HomeView(Context context, AttributeSet attrs){
+    public PlanetListView(Context context, AttributeSet attrs){
         super(context, attrs);
-        presenter - DaggerService.<~>getComponentForFlow(this).presenter();
+        presenter = DaggerService.<PlanetListComponent>getComponentForFlow(this).presenter();
     }
 
     @Override
@@ -35,13 +36,16 @@ public class PlanetListView extends FrameLayout {
     }
 
     @Override
-    protected void onFInishedInflate(){
-        super.onFinishedInflate();
+    protected void onFinishInflate(){
+        super.onFinishInflate();
         recycler = (RecyclerView) findViewById(R.id.recycler_planet_list);
-        recycler.setAdapter(adapter = new PlanetAdapter();)
+        recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycler.setAdapter(adapter = new PlanetAdapter());
     }
 
-    public void showPlanets(@NonNull List<Planet> planets) {}
+    public void showPlanets(@NonNull List<Planet> planets) {
+        adapter.setPlanets(planets);
+    }
 
     public void showError(Throwable e) {
         Snackbar.make(this, "Sean please add detail", Snackbar.LENGTH_LONG);

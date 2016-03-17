@@ -9,39 +9,26 @@ import net.seanamos.flowsample.core.dagger.ScreenComponentFactory;
 import net.seanamos.flowsample.data.model.Planet;
 import net.seanamos.flowsample.ui.screen.Screen;
 
-import auto.parcelgson.AutoParcelGson;
+import auto.parcel.AutoParcel;
 import flow.ClassKey;
 import flow.TreeKey;
+import me.tatarka.gsonvalue.annotations.GsonConstructor;
 
-@AutoParcelGson
+@AutoParcel
 @Screen(layout = R.layout.detail_planet, name = "Planet")
 public abstract class PlanetDetailScreen extends ClassKey implements TreeKey, ScreenComponentFactory<ApplicationComponent>, Parcelable {
 
-    public abstract Object parent();
     public abstract Planet planet();
 
-    @AutoParcelGson.Builder
-    public interface Builder {
-        Builder parent(Object parent);
-        Builder planet(Planet planet);
-        PlanetDetailScreen build();
-    }
-
+    @NonNull
     @Override
-    public Object buildComponent(ApplicationComponent parent) {
+    public Object buildComponent(@NonNull ApplicationComponent parent) {
         return parent.plus(new PlanetDetailModule(planet()));
     }
 
-    @Override
-    public Object getParentKey() { return parent();}
-
     @NonNull
-    public static Builder builder() {
-        return new AutoParcelGson_PlanetScreen.Builder();
-    }
-
-    @NonNull
-    public static Builder builder(@NonNull PlanetDetailScreen source) {
-        return new AutoParcelGson_PlanetScreen.Builder(source);
+    @GsonConstructor
+    public static PlanetDetailScreen from(@NonNull Planet person){
+        return new AutoParcel_PlanetDetailScreen(person);
     }
 }

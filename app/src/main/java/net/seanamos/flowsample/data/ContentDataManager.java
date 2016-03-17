@@ -6,7 +6,6 @@ import net.seanamos.flowsample.data.model.Person;
 import net.seanamos.flowsample.data.model.Planet;
 import net.seanamos.flowsample.data.network.SWService;
 import net.seanamos.flowsample.data.network.response.PagingResponse;
-import net.seanamos.flowsample.data.network.response.PagingResponsePlanets;
 import net.seanamos.flowsample.data.persistence.DataStore;
 
 import java.util.ArrayList;
@@ -30,6 +29,6 @@ public class ContentDataManager implements DataManager {
 
     @Override
     public Observable<ArrayList<Planet>> getPlanets() {
-        return swapi.fetchPlanets().map(PagingResponsePlanets::results);
+        return swapi.fetchPlanets().map(PagingResponse::results);
     }
 }

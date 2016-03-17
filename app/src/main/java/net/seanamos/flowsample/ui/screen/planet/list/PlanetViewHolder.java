@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.ui.screen.home;
+package net.seanamos.flowsample.ui.screen.planet.list;
 
 import android.view.View;
 import android.widget.TextView;
@@ -30,6 +30,6 @@ public class PlanetViewHolder extends GlossaryViewHolder<Planet> implements View
 
     @Override
     public void onClick(View v) {
-        Flow.get(v).set(PlanetDetailScreen.builder().parent(Flow.getKey(v)).planet(planet).build());
+        Flow.get(v).set(PlanetListScreen.from(planet));
     }
 }

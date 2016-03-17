@@ -4,10 +4,13 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-import auto.parcelgson.AutoParcelGson;
-import auto.parcelgson.gson.annotations.SerializedName;
 
-@AutoParcelGson
+import com.google.gson.annotations.SerializedName;
+
+import auto.parcel.AutoParcel;
+import me.tatarka.gsonvalue.annotations.GsonBuilder;
+
+@AutoParcel
 public abstract class Planet implements Parcelable {
 
     public abstract String name();
@@ -29,7 +32,7 @@ public abstract class Planet implements Parcelable {
     public abstract String url();
 
 
-    @AutoParcelGson.Builder
+    @AutoParcel.Builder
     interface Builder {
         Builder name(String name);
         Builder rotationPeriod(String rotationPeriod);

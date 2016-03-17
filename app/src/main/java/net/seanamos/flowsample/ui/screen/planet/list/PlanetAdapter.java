@@ -1,4 +1,4 @@
-package net.seanamos.flowsample.ui.screen.home;
+package net.seanamos.flowsample.ui.screen.planet.list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

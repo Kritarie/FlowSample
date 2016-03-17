@@ -34,7 +34,7 @@ public class HomePresenter extends ViewPresenter<HomeView> {
 
         if (people != null) {
             if (getView() != null) {
-                getView().showList(people);
+                getView().showPeople(people);
             }
         } else {
             dataManager.getPeople()
@@ -50,9 +50,9 @@ public class HomePresenter extends ViewPresenter<HomeView> {
     }
 
     private void onLoadComplete(ArrayList<Person> people) {
-        this.people = people;
-        HomeView view = getView();
-        if (view != null) view.showList(people);
+       this.people = people;
+       HomeView view = getView();
+       if (view != null) view.showPeople(people);
     }
 
     private void onError(Throwable e) {

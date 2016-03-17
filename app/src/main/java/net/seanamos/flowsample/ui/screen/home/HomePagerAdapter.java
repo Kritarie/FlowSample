@@ -7,9 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.data.model.Person;
 import net.seanamos.flowsample.data.model.Planet;
+import net.seanamos.flowsample.ui.screen.planet.list.PlanetAdapter;
 
 import java.util.List;
 
