@@ -28,7 +28,7 @@ public abstract class PlanetDetailScreen extends ClassKey implements TreeKey, Sc
 
     @NonNull
     @GsonConstructor
-    public static PlanetDetailScreen from(@NonNull Planet person){
-        return new AutoParcel_PlanetDetailScreen(person);
+    public static PlanetDetailScreen from(@NonNull Planet planet){
+        return new AutoParcel_PlanetDetailScreen(planet);
     }
 }
