@@ -13,8 +13,8 @@ import dagger.Provides;
  */
 @Module
 public class PlanetListModule {
-    @Provides
-    @NonNull @ScreenScope
+
+    @Provides @NonNull @ScreenScope
     public PlanetListPresenter providePresenter(@NonNull DataManager manager){
         return new PlanetListPresenter(manager);
     }

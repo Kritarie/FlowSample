@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import net.seanamos.flowsample.R;
 import net.seanamos.flowsample.core.ApplicationComponent;
 import net.seanamos.flowsample.core.dagger.ScreenComponentFactory;
-import net.seanamos.flowsample.data.model.Planet;
 import net.seanamos.flowsample.ui.screen.Screen;
 
 
@@ -27,9 +26,9 @@ public abstract class PlanetListScreen extends ClassKey implements ScreenCompone
         return parent.plus(new PlanetListModule());
     }
 
-    @NonNull
+
     @GsonConstructor
-    public static PlanetListScreen from(@NonNull Planet planet) {
-        return new AutoParcel_PlanetListScreen(planet);
+    public static PlanetListScreen create() {
+        return new AutoParcel_PlanetListScreen();
     }
 }
