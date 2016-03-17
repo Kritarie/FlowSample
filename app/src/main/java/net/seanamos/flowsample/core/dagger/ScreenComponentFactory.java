@@ -1,5 +1,8 @@
 package net.seanamos.flowsample.core.dagger;
 
+import android.support.annotation.NonNull;
+
 public interface ScreenComponentFactory<T> {
-    Object buildComponent(T parent);
+    @NonNull
+    Object buildComponent(@NonNull T parent);
 }

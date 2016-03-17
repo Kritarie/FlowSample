@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import com.squareup.spoon.Spoon;
 
+import net.seanamos.flowsample.core.ApplicationComponent;
 import net.seanamos.flowsample.ui.FlowSampleActivity;
 import net.seanamos.flowsample.core.dagger.DaggerService;
 
@@ -54,23 +55,13 @@ public class ScreenTestRule extends UiThreadTestRule {
                         throw new IllegalStateException("Test method must be annotated @WithHistory");
                     }
                     History history = (History) testClassInstance.getClass().getMethod(withHistory.value()).invoke(testClassInstance);
-                    //DaggerService.<ActivityComponent>getComponentForContext(activity)
-                    //       .initialHistory().set(history);
+                    DaggerService.<ApplicationComponent>getComponentForContext(activity)
+                            .initialHistory().set(history);
                     instrumentation.waitForIdleSync();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.getWindow().addFlags(SHOW_SCREEN_FLAGS);
-                        }
-                    });
+                    runOnUiThread(() -> activity.getWindow().addFlags(SHOW_SCREEN_FLAGS));
                     SystemClock.sleep(1000);
                     base.evaluate();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.getWindow().addFlags(SHOW_SCREEN_FLAGS);
-                        }
-                    });
+                    runOnUiThread(() -> activity.getWindow().addFlags(SHOW_SCREEN_FLAGS));
                 } finally {
                     //TODO screenshot here
                     Screenshot screenshot = description.getAnnotation(Screenshot.class);
@@ -81,12 +72,7 @@ public class ScreenTestRule extends UiThreadTestRule {
                         }
                         Spoon.screenshot(activity, name, description.getTestClass().getName(), description.getMethodName());
                     }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.getWindow().clearFlags(SHOW_SCREEN_FLAGS);
-                        }
-                    });
+                    runOnUiThread(() -> activity.getWindow().clearFlags(SHOW_SCREEN_FLAGS));
                     finishActivity();
                 }
             }
@@ -107,8 +93,7 @@ public class ScreenTestRule extends UiThreadTestRule {
         startIntent.setClassName(targetPackage, FlowSampleActivity.class.getName());
         startIntent.addFlags(268435456);
         Log.d(TAG, String.format("Launching activity %s", FlowSampleActivity.class.getName()));
-        FlowSampleActivity activity = FlowSampleActivity.class.cast(instrumentation.startActivitySync(startIntent));
-        return activity;
+        return FlowSampleActivity.class.cast(instrumentation.startActivitySync(startIntent));
     }
 
     void finishActivity() {

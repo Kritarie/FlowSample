@@ -63,8 +63,8 @@ public class NetworkModule {
         return new Retrofit.Builder()
                 .client(client)
                 .baseUrl(url)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .validateEagerly(BuildConfig.DEBUG)
                 .build()
                 .create(SWService.class);

@@ -28,6 +28,12 @@ android {
     }
 }
 
+android {
+    lintOptions {
+        abortOnError false
+    }
+}
+
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
@@ -49,8 +55,11 @@ dependencies {
     compile 'com.google.dagger:dagger:2.0'
     compile 'com.google.code.gson:gson:2.4'
 
-    compile 'me.tatarka:auto-parcel-gson:0.1'
-    apt 'me.tatarka:auto-parcel-gson-processor:0.1'
+    compile 'com.github.frankiesardo:auto-parcel:0.3.1'
+    apt 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
+
+    apt 'me.tatarka.gsonvalue:gsonvalue-processor:0.2'
+    compile 'me.tatarka.gsonvalue:gsonvalue:0.2'
 
     compile 'io.reactivex:rxjava:1.1.1'
     compile 'io.reactivex:rxandroid:1.1.0'
