@@ -18,12 +18,7 @@ import java.util.List;
 public class HomePagerAdapter extends PagerAdapter{
 
     private RecyclerView[] recyclers;
-    private PersonAdapter personAdapter;
-    private PlanetAdapter planetAdapter;
-
-    public HomePagerAdapter() {
-        recyclers = new RecyclerView[2];
-    }
+    public HomePagerAdapter(RecyclerView[] rec){recyclers = rec;}
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
@@ -38,26 +33,7 @@ public class HomePagerAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         //return super.instantiateItem(container, position);
-
-        if(position == 0){
-            recyclers[0] = new RecyclerView(container.getContext());
-            recyclers[0].setAdapter(personAdapter = new PersonAdapter());
-            recyclers[0].setLayoutManager(new LinearLayoutManager(container.getContext()));
-            //recyclers[0].setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-            container.addView(recyclers[0]);
-            return recyclers[0];
-        }
-        if(position == 1){
-            recyclers[1] = new RecyclerView(container.getContext());
-            recyclers[1].setAdapter(planetAdapter = new PlanetAdapter());
-            recyclers[1].setLayoutManager(new LinearLayoutManager(container.getContext()));
-
-            container.addView(recyclers[1]);
-            return recyclers[1];
-        }
-
-        return " ";
+        return recyclers[position];
     }
 
     @Override
@@ -65,15 +41,4 @@ public class HomePagerAdapter extends PagerAdapter{
         container.removeView((View) object);
     }
 
-    public void setPeople(List<Person> people) {
-        //this.people = people;
-        //notifyDataSetChanged();
-        personAdapter.setPeople(people);
-        notifyDataSetChanged();
-    }
-
-    public void setPlanets(List<Planet> planets) {
-        planetAdapter.setPlanets(planets);
-        notifyDataSetChanged();
-    }
 }
